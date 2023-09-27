@@ -48,7 +48,7 @@ namespace TestApp
             Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
             var logWriter = new StreamWriter("debug.txt");
             Trace.Listeners.Add(new TextWriterTraceListener(logWriter));
-#if NETFRAMEWORK
+#if NETFRAMEWORK || WINDOWS
             InferenceEngine.Visualizer = new WindowsVisualizer();
 #endif
             Debug.AutoFlush = true;
@@ -83,11 +83,6 @@ namespace TestApp
 
             Stopwatch watch = new Stopwatch();
             watch.Start();
-
-            new GatedFactorTests().GatedSplitTest();
-            //new SerialTests().CountTrueTest();
-            //new InferTests().InferDeterministicTest4();
-            //new ModelTests().ObservedConstraintViolationError();
 
             bool runAllTests = false;
             if (runAllTests)
